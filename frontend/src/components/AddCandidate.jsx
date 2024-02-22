@@ -67,6 +67,7 @@ export default function AddCandidate({state}) {
               label="Enter name"
               name="name"
               onChange={e=>setName(e.target.value)}
+              style={{ backgroundColor:"#B8BBBD" }}
               autoFocus
             />
             <TextField
@@ -78,6 +79,7 @@ export default function AddCandidate({state}) {
               type="party"
               id="party"
               onChange={e=>setParty(e.target.value)}
+              style={{ backgroundColor:"#B8BBBD" }}
             />
             <TextField
               margin="normal"
@@ -88,6 +90,7 @@ export default function AddCandidate({state}) {
               type="img"
               id="img"
               onChange={e=>setImageUri(e.target.value)}
+              style={{ backgroundColor:"#B8BBBD" }}
             />
             <Button
               fullWidth

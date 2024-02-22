@@ -21,10 +21,15 @@ export default function GivePermission({state}) {
     const [address, setAddress] = useState('');
 
   async function saveData(){
-    const transaction = await state.contract.giveRightToVote(address);
-    await transaction.wait();
-    toast.success('Permission enabled');
-    console.log(address);
+    try{
+      const transaction = await state.contract.giveRightToVote(address);
+      await transaction.wait();
+      toast.success('Permission enabled');
+      console.log(address);
+    }catch(err){
+      console.log(err);
+      toast.error('Only one votes per address');
+    }
   }
 
   return (
@@ -55,6 +60,7 @@ export default function GivePermission({state}) {
               label="Enter address"
               name="name"
               onChange={e=>setAddress(e.target.value)}
+              style={{ backgroundColor:"#B8BBBD" }}
               autoFocus
             />
             <Button

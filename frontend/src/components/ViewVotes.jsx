@@ -31,8 +31,8 @@ export default function ViewVotes({state}) {
 //       console.log(err);
 //       toast.error('Transaction failed');
 //     }
-    
 //   }
+
     const [candidates, setCandidates] = React.useState([])
     const [votes, setVotes] = React.useState([])
     React.useEffect(()=>{
