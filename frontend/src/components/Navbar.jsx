@@ -8,9 +8,6 @@ import {
   AiOutlineHome,
   AiOutlineUser,
 } from "react-icons/ai";
-import{
-  CiLocationOn
-}from "react-icons/ci";
 
 import { CgFileDocument } from "react-icons/cg";
 
@@ -60,36 +57,26 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/help"
+                to="/AddCandidate"
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> Help
+                <AiOutlineUser style={{ marginBottom: "2px" }} /> Add Candidate
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={Link} to="/login" onClick={() => updateExpanded(false)}>
-                <CgFileDocument style={{ marginBottom: "2px" }} /> File Complaint
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/Circular"
-                onClick={() => updateExpanded(false)}
-              >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Circular
+              <Nav.Link as={Link} to="/GivePermission" onClick={() => updateExpanded(false)}>
+                <CgFileDocument style={{ marginBottom: "2px" }} /> Enable Permission
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/Locate"
+                to="/ViewVotes"
                 onClick={() => updateExpanded(false)}
               >
-                <CiLocationOn style={{ marginBottom: "2px" }} /> Locate 
+                <CgFileDocument style={{ marginBottom: "2px" }} /> View Count
               </Nav.Link>
             </Nav.Item>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -8,19 +8,14 @@ import './App.css'
 import './style.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Police from './Police';
-import Magistrate from './Magistrate';
-
-const Loader = lazy(()=>import('./components/Loading/Loader'))
-const Help = lazy(()=>import('./components/Help/Help'));
-const NavBar = lazy(()=>import('./components/Navbar'));
-const Login = lazy(()=>import('./Login'));
+import NavBar from './components/Navbar';
+const Loader = () => <div>Loading...</div>;
 const Home = lazy(()=>import('./components/Home/Home'))
-const FileComplain = lazy(()=>import('./components/FileComplain'))
-const SeeComplain = lazy(()=>import('./components/SeeComplain'))
-const Circular = lazy(()=>import('./components/Circular/Circular'))
-const Locate = lazy(()=>import('./components/Locate'))
 
+
+const AddCandidate = lazy(()=>import('./components/AddCandidate'))
+const GivePermission = lazy(()=>import('./components/GivePermission'))
+const ViewVotes = lazy(()=>import('./components/ViewVotes'))
 
 function App(){
 
@@ -33,7 +28,7 @@ function App(){
   
   useEffect(() => {
     const connectWallet = async () => {
-      const contractAddress = "0xc57EBE088BEacEF44E303a545E41daD5bECf7704";
+      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
       const contractabi = abi.abi;
       try {
         const { ethereum } = window;
@@ -51,7 +46,6 @@ function App(){
       }
     };
     connectWallet();
-  
   }, []);
 
   return(
@@ -61,14 +55,9 @@ function App(){
           <NavBar/>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/Login' element={<Login/>}/>
-            <Route path='/FileComplain' element={<FileComplain state = {state}/>}/>
-            <Route path='/SeeComplain' element={<SeeComplain state={state}/>}/>
-            <Route path='/Help' element={<Help/>}/>
-            <Route path='/Circular' element={<Circular/>}/>
-            <Route path='/Police' element={<Police/>}/>
-            <Route path='/Magistrate' element={<Magistrate/>}/>
-            <Route path='/Locate' element={<Locate/>}/>
+            <Route path='/AddCandidate' element={<AddCandidate state={state}/>}/>
+            <Route path='/GivePermission' element={<GivePermission state={state}/>}/>
+            <Route path='/ViewVotes' element={<ViewVotes state={state}/>}/>
           </Routes>
         </Router>
       </RecoilRoot>

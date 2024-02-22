@@ -2,63 +2,58 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract Complain{
-    struct ComplainDetails{
-        string id;
+contract Complain {
+
+    struct Candidate {
         string name;
-        string complainAddress;
-        string complain;
-        string phone;
-        string status;
-        string report;
+        string party;
+        string imageUri;
     }
 
-    ComplainDetails [] public Complains;
-    event EtherReceived(uint indexed amount);
-
-    function getComplainIndex(string memory _id) internal view returns (uint8) {
-        for (uint8 i = 0; i < Complains.length; i++) {
-            if (keccak256(abi.encodePacked(Complains[i].id)) == keccak256(abi.encodePacked(_id))) {
-                return i;
-            }
-        }
-        return 0;
+    struct Voter {
+        address adr;
+        bool voted;
+        uint weight;
     }
 
-    function addComplains(string memory _id,string memory _name,string memory _address,string memory _complain,string memory phone) public {
-        ComplainDetails storage newComplain = Complains.push();
-        (newComplain.id,newComplain.name,newComplain.complainAddress,newComplain.complain,newComplain.phone) = (_id,_name,_address,_complain,phone);
+    mapping(uint256 => Candidate) public candidates;
+    uint256 public candidateCount;
+
+    address public owner;
+
+    mapping(uint256 => uint256) public votes;
+    uint256 public totalVotes;
+
+    mapping (uint8 => Voter) public voters;
+
+    constructor() {
+        owner = msg.sender;
     }
 
-    function addStatus(string memory _status,string memory _id) public {
-        uint8 index = getComplainIndex(_id); 
-        ComplainDetails storage currentComplain = Complains[index];
-        currentComplain.status = _status;
+    function addCandidate(string calldata name, string calldata party, string calldata imageUri) public {
+        require(owner == msg.sender, "Not the owner of the contract");
+        candidateCount++;
+        Candidate memory person = Candidate({ name: name, party: party, imageUri: imageUri });
+        candidates[candidateCount] = person;
     }
 
-    function addReport(string memory _report,string memory _id,string memory _status) public {
-        uint8 index = getComplainIndex(_id);
-        ComplainDetails storage currentComplain = Complains[index];
-        currentComplain.report = _report;
-        currentComplain.status = _status;
+    function giveRightToVote(uint8 voter) public {
+        require(
+            !voters[voter].voted,
+            "The voter already voted."
+        );
+        require(voters[voter].weight == 0);
+        voters[voter].weight = 1;
     }
 
-    function getPhoneComplaints()public view returns (ComplainDetails [] memory){
-        return(Complains);
-    }
 
-    // Fallback function
-    fallback() external payable {
-        // Handle received Ether
-        // You can add custom logic here
-        emit EtherReceived(msg.value);
+    function vote(uint256 id,uint8 voter) public {
+        require(voters[voter].weight > 0, "You don't have the right to vote.");
+        require(!voters[voter].voted,"You have already voted" );
+        require(id > 0, "Candidate doesn<t exist");
+        require(id <= candidateCount, "Candidate doesn<t exist");
+        votes[id]++;
+        totalVotes++;
+        voters[voter].voted = true;
     }
-
-    // Receive function
-    receive() external payable {
-        // Handle received Ether
-        // You can add custom logic here
-        emit EtherReceived(msg.value);
-    }
-
 }
