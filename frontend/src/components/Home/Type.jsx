@@ -7,8 +7,8 @@ function Type() {
       options={{
         strings: [
         "Blockchain",
-        "SecureJury",
-        "Decentralized FIR"
+        "Byte The Ballot",
+        "Decentralized Voting System",
         ],
         autoStart: true,
         loop: true,

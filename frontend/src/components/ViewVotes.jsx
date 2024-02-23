@@ -71,39 +71,38 @@ export default function ViewVotes({state}) {
         <CssBaseline />
         <Box sx={{ my: 20, display:'flex',justifyContent:"center",flexWrap:'wrap'}}>
           {candidates.map((item, index) => (
-            <div key={index} style={{ marginBottom: '0.5rem',marginTop:'0.5rem' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                  border: 1,
-                  borderRadius: 3,
-                  background: "#ffffff",
-                  width: "90%",
-                  opacity: "70%",
+            <div key={index} style={{ marginBottom: '3rem'}}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column', // Display contents vertically
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                border: 1,
+                borderRadius: 3,
+                background: "#ffffff",
+                width: "100",
+                opacity: "70%",
+                margin:2
+              }}
+            >
+              <img
+                src={item.imageUri}
+                alt={item.name}
+                style={{
+                  width: '15rem',
+                  height: '10rem',
+                  borderRadius: '30px',
+                  marginBottom: '1rem',
                 }}
-              >
-                <img
-                  src={item.imageUri}
-                  alt={item.name}
-                  style={{
-                    width: '15rem',
-                    height: '10rem',
-                    marginLeft: '2rem',
-                    marginRight: '1rem',
-                    marginTop: '1rem',
-                    marginBottom: '1rem',
-                    borderRadius:'30px'
-                  }}
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 0, marginRight: 5, width: '130px' }}>
-                  <div><b>NAME  : </b>{item.name}</div>
-                  <div><b>PARTY : </b>{item.party}</div>
-                  <div><b>Total Votes : </b>{votes[index]}</div>
-                </Box>
+              />
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                <div><b>NAME  : </b>{item.name}</div>
+                <div style={{ marginTop: '0.5rem' }}><b>PARTY : </b>{item.party}</div>
+                <div style={{ marginTop: '0.5rem' }}><b>Total Votes : </b>{votes[index]}</div>
               </Box>
-            </div>
+            </Box>
+          </div>
           ))}
         </Box>
       </Container>

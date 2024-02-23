@@ -22,12 +22,12 @@ function Home() {
         <Row>
           <Col md={7} className="home-header">
             <h1 style={{ paddingBottom: 15 }} className="heading">
-              Welcome to Decentralized <strong className="main-name"> FIR</strong> system
+              Welcome to Decentralized <strong className="main-name"> Voting</strong> system
             </h1>
-
+{/* 
             <h1 className="heading-name">
-              Project <strong className="main-name"> SecureJury</strong>
-            </h1>
+              Project <strong className="main-name"> </strong>
+            </h1> */}
 
             <div style={{ padding: 50, textAlign: "left" }}>
               <Type />
